@@ -1,18 +1,18 @@
 import React from 'react';
 
-  const FilteredFruitList = props => {
-    const list = !props.filter || props.filter === 'all' ? props.fruit : props.fruit.filter(i => i.fruit_type === props.filter);
+const FilteredFruitList = (props) => {
+  const list = !props.filter || props.filter === 'all' ? props.fruit : props.fruit.filter(i => i.fruit_type === props.filter);
 
-    return (
-      <ul className="fruit-list">
-        {list.map((item, index) => <li key={index}>{item.char}</li>)}
-      </ul>
-    );
-  }
+  return (
+    <ul className="fruit-list">
+      {list.map((fruit, index) => <li key={index}>{fruit.char}</li>)}
+    </ul>
+  );
+}
 
 FilteredFruitList.defaultProps = {
-  filter: [],
-  fruit: []
-}
+  fruit: [],
+  filter: null,
+};
 
 export default FilteredFruitList;
