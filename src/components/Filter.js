@@ -1,17 +1,17 @@
 import React from 'react';
 
-const Filter = ({ filters, handleChange }) => (
-  <select onChange={handleChange} defaultValue='all'>
+const Filter = props =>
+  <select onChange={props.handleChange} defaultValue='all'>
     <option value='all'>All</option>
-    {filters.map(filter =>
+    {props.filters.map(filter =>
       <option key={filter} value={filter}>{filter}</option>
     )}
   </select>
-);
 
 Filter.defaultProps = {
-  filters: [],
-  handleChange: () =>{}
-};
+  filters: null,
+  handleChange: () => { },
+}
+
 
 export default Filter;

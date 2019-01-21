@@ -6,20 +6,22 @@ import FruitBasket from './FruitBasket';
 export default class App extends Component {
     constructor() {
         super();
-
         this.state = {
             fruit: [],
             filters: [],
             currentFilter: null,
-        };
-        this.fetchFilters = this.fetchFilters.bind(this);
-        this.fetchFruit= this.fetchFruit.bind(this);
-        this.updateFilter = this.updateFilter.bind(this);
+        }
     }
 
     componentWillMount() {
         this.fetchFilters();
         this.fetchFruit();
+    }
+
+    fetchFruit() {
+        fetch('/api/fruit')
+            .then(response => response.json())
+            .then(fruit => this.setState({ fruit }));
     }
 
     fetchFilters = () => {
@@ -28,13 +30,7 @@ export default class App extends Component {
             .then(filters => this.setState({ filters }));
     }
 
-    fetchFruit() {
-        fetch('/api/fruit')
-            .then(res => res.json())
-            .then(fruit => this.setState({ fruit }));
-    }
-
-    updateFilter = event => {
+    handleFilterChange = event => {
         console.log('new filter: ', event.target.value);
         this.setState({ currentFilter: event.target.value });
     }
@@ -45,10 +41,10 @@ export default class App extends Component {
                 fruit={this.state.fruit}
                 filters={this.state.filters}
                 currentFilter={this.state.currentFilter}
-                updateFilterCallback={this.updateFilter}
+                updateFilterCallback={this.handleFilterChange}
             />
-        );
+
+        )
     }
 
 }
-
